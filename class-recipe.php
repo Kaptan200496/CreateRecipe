@@ -40,6 +40,7 @@ class Recipe {
 				'{$this->description}'
 			)";
 			Database::query($insertEx);
+			return Database::$connection->insert_id;
 		}
 		// Если в базе есть такой рецепт, то отвечаем что рецепт уже есть
 		else {

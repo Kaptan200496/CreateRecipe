@@ -56,7 +56,7 @@ class Ingredients {
 				$responseRow = $responseDB[$i]->fetch_assoc();
 				$id = intval($responseRow['id']);
 				$name = $responseRow['name'];
-				$recipe = intval($responseRow['recipe'];
+				$recipe = intval($responseRow['recipe']);
 				$amount = $responseRow['amount'];
 				$object = (object)[
 					'id' => $id,

@@ -2,16 +2,10 @@ CREATE TABLE recipes (
 	id INTEGER(64) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
 	name VARCHAR(64),
 	description TEXT
-);
+) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 CREATE TABLE ingredients (
 	id INTEGER(64) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
 	recipe INTEGER(64),
 	name VARCHAR(64),
-	
-);
-CREATE TABLE quantitys (
-	id INTEGER(64) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-	recipe INTEGER(64),
-	ingredient INTEGER(64),
-	quantity INTEGER(64)
-);
+	amount TEXT
+) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;

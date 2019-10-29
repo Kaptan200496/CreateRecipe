@@ -52,10 +52,12 @@ class Ingredients {
 	}
 	// Метод для вытягивания ингредиентов по айди 
 	public static function getIngByRecipe($recipeId) {
+		// Проверяем переданый нам айди перед внесением запросов в базу
 		$r_id = intval($recipeId);
 		$selectEx = "SELECT * FROM ingredients WHERE recipe = {$r_id}";
 		$responseDB = Database::query($selectEx);
 		if($responseDB->num_rows > 1) {
+			// СОздаем пустой массив для заполнения из цикла
 			$arrayOfIngredients = [];
 			for($i = 0; $i < $responseDB->num_rows; $i++) {
 				$responseRow = $responseDB->fetch_assoc();
@@ -63,6 +65,7 @@ class Ingredients {
 				$name = $responseRow['name'];
 				$recipe = intval($responseRow['recipe']);
 				$amount = $responseRow['amount'];
+				//СОздаем объект для заполниня массива
 				$object = (object)[
 					'id' => $id,
 					'name' => $name,
@@ -71,24 +74,33 @@ class Ingredients {
 				];
 				array_push($arrayOfIngredients, $object);
 			}
+			// Возвращаем заполненый массив
 			return $arrayOfIngredients;
 		}
 		else {
 			print "Ингредиенты не найдены.";
 		}
 	}
-
+	// Метод для изменения рецепта 
+	// $ingFdb = string  Ингридиент из базы
+	// $recipe = int id Рецепта
+	// $ingFupd = string Ингредиент для апдейта
+	// $amount = string количество дял замены
 	public static function ingChange($ingFdb, $recipe, $ingFupd, $amount) {
+		// Проверяем перед подачей запроса поданый айди
 		$recipe_id = intval($recipe);
+		// Проверяем данные перед подачей их в запрос
 		$updtName = Database::sanitizeString($ingFupd);
 		$updtAmount = Database::sanitizeString($amount);
 		$ing_name = Database::sanitizeString($ingFdb);
+		// Запрос для получения строки с ингридиентом
 		$selectEx = "SELECT * FROM ingredients 
 		WHERE recipe = {$recipe_id} and name = '{$ing_name}'";
 		$responseDB = Database::query($selectEx);
 		if($responseDB->num_rows == 1) {
 			$responseRow = $responseDB->fetch_assoc();
 			$id_row = intval($responseRow['id']);
+			// Запрос для перезаписи ингридиента с новыми значениями в рецепт
 			$updateEx = "UPDATE ingredients SET name = '{$updtName}', 
 			amount = '{$updtAmount}' WHERE id = {$id_row}";
 			Database::query($updateEx);

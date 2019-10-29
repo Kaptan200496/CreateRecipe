@@ -57,7 +57,7 @@ class Recipe {
 		// Если рецепт найден , то отдаем его , если нет , то отвечаем что рецепта в базе нет
 		if($response->num_rows == 1) {
 			$responseRow = $response->fetch_assoc();
-			$id = $responseRow['id'];
+			$id = intval($responseRow['id']);
 			$name = $responseRow['name'];
 			$description = $responseRow['description'];
 			$recipeObject = (object)[

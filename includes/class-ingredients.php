@@ -54,7 +54,7 @@ class Ingredients {
 		if($responseDB->num_rows > 1) {
 			$arrayOfIngredients = [];
 			for($i = 0; $i < $responseDB->num_rows; $i++) {
-				$responseRow = $responseDB[$i]->fetch_assoc();
+				$responseRow = ($responseDB->$i)->fetch_assoc();
 				$id = intval($responseRow['id']);
 				$name = $responseRow['name'];
 				$recipe = intval($responseRow['recipe']);

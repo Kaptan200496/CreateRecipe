@@ -1,6 +1,6 @@
 {	
 	"action": "Создать рецепт",
-	"name": "babulilki",
+	"name": "babuwi",
 	"ingredients": ["meat", "peas", "mayonnaise", "eags", "cucumber"],
 	"amount": ["300гр", "1 банка", "по вкусу", "3 шт", "2 шт"],
 	"description": "Готовим из того что есть"

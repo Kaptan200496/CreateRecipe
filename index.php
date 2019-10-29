@@ -54,6 +54,14 @@ else if($action === "Изменить рецепт") {
 }
 else if ($action === "Вывести рецепт") {
 	$recipeObject = Recipe::getByName($recipeName);
-	print json_encode($recipeObject);
+	file_put_contents("text.txt", json_encode($recipeObject));
+	$recipeId = $recipeObject->id;
+	$getIng = Ingredients::getIngByRecipe($recipeId);
+	$response = (object)[
+		"recipe" => $recipeObject,
+		"ingredient" => $getIng
+	];
+	print json_encode($response);
+
 }
 ?>

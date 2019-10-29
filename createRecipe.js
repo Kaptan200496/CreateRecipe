@@ -20,6 +20,7 @@ document.getElementById("addRecipe").onclick = function() {
 	request.open("POST", "index.php", true);
 	request.send(requestJSON);
 }
+
 document.getElementById("edit").onclick = function() {
 	var nameRecipe = document.getElementById('nameRecipe').value; 
 	var description = document.getElementById('description').value;
@@ -39,6 +40,20 @@ document.getElementById("edit").onclick = function() {
 		amount: amount,
 		amountForChange: arrayAmountForChange,
 		description: description
+	};
+	var requestJSON = JSON.stringify(dataObject);
+
+	
+	var request = new XMLHttpRequest();
+	request.open("POST", "index.php", true);
+	request.send(requestJSON);
+}
+
+document.getElementById("getRecipe").onclick = function() {
+	var nameRecipe = document.getElementById('nameRecipe').value; 
+	var dataObject = {
+		action: "Вывести рецепт",
+		name: nameRecipe
 	};
 	var requestJSON = JSON.stringify(dataObject);
 

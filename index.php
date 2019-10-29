@@ -14,7 +14,7 @@ foreach($includes as $fileToInclude) {
 require_once("settings.php");
 // Подключиться к базе
 Database::connect();
-$requestData = file_get_contents('json_recipe_change.json');
+$requestData = file_get_contents('php://input');
 $requestObject = json_decode($requestData);
 
 $action = $requestObject->action;
@@ -52,8 +52,8 @@ else if($action === "Изменить рецепт") {
 	}
 	print "Рецепт изменен.";
 }
-else if ($action === "Вывести рецепт" {
+else if ($action === "Вывести рецепт") {
 	$recipeObject = Recipe::getByName($recipeName);
-	print $recipeObject;
+	print json_encode($recipeObject);
 }
 ?>

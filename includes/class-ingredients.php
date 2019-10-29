@@ -83,8 +83,10 @@ class Ingredients {
 		WHERE recipe = {$recipe_id} and name = '{$ing_name}'";
 		$responseDB = Database::query($selectEx);
 		if($responseDB->num_rows == 1) {
+			$responseRow = $responseDB->fetch_assoc();
+			$id_row = intval($responseRow['id']);
 			$updateEx = "UPDATE ingredients SET name = '{$updtName}', 
-			amount = '{$updtAmount}'";
+			amount = '{$updtAmount}' WHERE id = {$id_row}";
 			Database::query($updateEx);
 		}
 		else {

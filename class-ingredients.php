@@ -22,12 +22,13 @@ class Ingredients {
 		$this->name = Database::sanitizeString($object->name);
 		// Получаем из переданного объекта id  и по нему, с помощью класса Recipe достаем объект рецепта
 		$this->recipe = Recipe::getById($object->recipe);
+		file_put_contents("text.txt", json_encode($this->recipe));
 		// Получаем из переданного объекта количество ингридиента
 		$this->amount = Database::sanitizeString($object->amount);
 
 	}
 	public function saveToDB() {
-		$selectEx = "SELECT * FROM ingredients WHERE name = '{$this->name}' and recipe = '{$this->recipe}'";
+		$selectEx = "SELECT * FROM ingredients WHERE name = '{$this->name}' and recipe = {$this->recipe->id}";
 		$responseDB = Database::query($selectEx);
 		if($responseDB->num_rows == 0) {
 			$insertEx = "INSERT INTO ingredients (
@@ -35,7 +36,7 @@ class Ingredients {
 				name,
 				amount
 			) VALUES (
-				'{$this->recipe}',
+				{$this->recipe->id},
 				'{$this->name}',
 				'{$this->amount}'
 			)";

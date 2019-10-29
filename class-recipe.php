@@ -28,11 +28,11 @@ class Recipe {
 
 	public  function saveToDB() {
 		// записываем в переменную выражение для проверки сохраняемого рецепта в базе
-		$selectEx = "SELECT * FROM recipe WHERE name = '{$this->name}'";
+		$selectEx = "SELECT * FROM recipes WHERE name = '{$this->name}'";
 		$responseDB = Database::query($selectEx);
 		// Если в базе нет записей об этом рецепте, то записываем его в базу.
 		if($responseDB->num_rows == 0) {
-			$insertEx = "INSERT INTO recipe (
+			$insertEx = "INSERT INTO recipes (
 				name,
 				description
 			) VALUES (
@@ -52,7 +52,7 @@ class Recipe {
 		// Очищаем поступившие данные для безопасности нашей БД
 		$clean_name = Database::sanitizeString($recipe);
 		// Создаем выражение для вытягивания из базы рецепта
-		$selectEx = "SELECT * FROM recipe WHERE name = '{$clean_name}'";
+		$selectEx = "SELECT * FROM recipes WHERE name = '{$clean_name}'";
 		$response = Database::query($selectEx);
 		// Если рецепт найден , то отдаем его , если нет , то отвечаем что рецепта в базе нет
 		if($response->num_rows == 1) {
@@ -77,7 +77,7 @@ class Recipe {
 		// Очищаем поступившие данные для безопасности нашей БД
 		$clean_id = intval($id);
 		// Создаем выражение для вытягивания из базы рецепта
-		$selectEx = "SELECT * FROM recipe WHERE name = '{$clean_id}'";
+		$selectEx = "SELECT * FROM recipes WHERE id = {$clean_id}";
 		$response = Database::query($selectEx);
 		// Если рецепт найден , то отдаем его , если нет , то отвечаем что рецепта в базе нет
 		if($response->num_rows == 1) {

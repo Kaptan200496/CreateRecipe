@@ -1,6 +1,6 @@
 {	
 	"action": "Изменить рецепт",
-	"name": "Оливье",
+	"name": "babulilki",
 	"ingredients": ["meat"],
 	"ingForChange": ["meat"],
 	"amount": ["300гр", "1 банка", "по вкусу", "3 шт", "2 шт"],
